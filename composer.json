@@ -2,6 +2,13 @@
     "name": "idimensionz/http-client",
     "description": "PHP HTTP client interface and implementations",
     "type": "library",
+    "license": "MIT License",
+    "authors": [
+        {
+            "name": "Jim Mullen",
+            "email": "info@idimensionz.com"
+        }
+    ],
     "require": {
         "php": "^5.3 || ^7.0",
         "guzzlehttp/guzzle": "^6.3"
@@ -11,11 +18,9 @@
         "codeclimate/php-test-reporter": "^0.4.4",
         "phake/phake": "<3.0.0"
     },
-    "license": "MIT License",
-    "authors": [
-        {
-            "name": "Jim Mullen",
-            "email": "info@idimensionz.com"
+    "autoload": {
+        "psr-4": {
+            "iDimensionz\\HttpClient\\": "lib"
         }
-    ]
+    }
 }
