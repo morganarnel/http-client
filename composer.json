@@ -3,7 +3,8 @@
     "description": "PHP HTTP client interface and implementations",
     "type": "library",
     "require": {
-        "php": "^5.3 || ^7.0"
+        "php": "^5.3 || ^7.0",
+        "guzzlehttp/guzzle": "^6.3"
     },
     "require-dev": {
         "phpunit/phpunit": "5.7.x-dev",
