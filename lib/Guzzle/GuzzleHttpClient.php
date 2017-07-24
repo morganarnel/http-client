@@ -1,11 +1,11 @@
 <?php
 /*
- * iDimensionz/{linode-api-v4}
+ * iDimensionz/{http-client}
  * GuzzleHttpClient.php
  *  
  * The MIT License (MIT)
  * 
- * Copyright (c) 2015 iDimensionz
+ * Copyright (c) 2017 iDimensionz
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
