@@ -20,7 +20,7 @@
     },
     "autoload": {
         "psr-4": {
-            "iDimensionz\\HttpClient\\": "lib"
+            "iDimensionz\\HttpClient\\": "lib/"
         }
     }
 }
