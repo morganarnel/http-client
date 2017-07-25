@@ -43,6 +43,15 @@ class GuzzleHttpClient implements HttpClientInterface
      * @var Client
      */
     private $guzzleClient;
+    /**
+     * @var array
+     */
+    private $defaultOptions;
+
+    public function __construct($defaultOptions = array())
+    {
+        $this->setDefaultOptions($defaultOptions);
+    }
 
     /**
      * Create a GET request for the client
@@ -155,7 +164,7 @@ class GuzzleHttpClient implements HttpClientInterface
     public function getGuzzleClient()
     {
         if (is_null($this->guzzleClient)) {
-            $this->guzzleClient = new Client();
+            $this->guzzleClient = new Client($this->getDefaultOptions());
         }
 
         return $this->guzzleClient;
@@ -172,5 +181,24 @@ class GuzzleHttpClient implements HttpClientInterface
             );
         }
         $this->guzzleClient = $guzzleClient;
+    }
+
+    /**
+     * @return array
+     */
+    public function getDefaultOptions()
+    {
+        return $this->defaultOptions;
+    }
+
+    /**
+     * @param array $defaultOptions
+     */
+    public function setDefaultOptions($defaultOptions)
+    {
+        if (!is_array($defaultOptions)) {
+            throw new \InvalidArgumentException(__METHOD__ . '/defaultOptions must be an array.');
+        }
+        $this->defaultOptions = $defaultOptions;
     }
 }
