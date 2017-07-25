@@ -28,10 +28,10 @@
 
 namespace iDimensionz\HttpClient\Guzzle;
 
-use Guzzle\Http\Client;
-use Guzzle\Http\Message\RequestInterface;
+use GuzzleHttp\Client;
 use iDimensionz\HttpClient\HttpClientInterface;
 use iDimensionz\HttpClient\HttpResponse;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class GuzzleHttpClient wrapper for Guzzle 6.3.
@@ -48,13 +48,12 @@ class GuzzleHttpClient implements HttpClientInterface
      * Create a GET request for the client
      *
      * @param string $uri     Resource URI
-     * @param array  $headers HTTP headers
      * @param array  $options Options to apply to the request.
      * @return HttpResponse
      */
-    public function get($uri = null, $headers = null, $options = array())
+    public function get($uri = null, $options = array())
     {
-        $guzzleRequestInterface = $this->getGuzzleClient()->get($uri, $headers, $options);
+        $guzzleRequestInterface = $this->getGuzzleClient()->get($uri, $options);
 
         return $this->createResponse($guzzleRequestInterface);
     }
@@ -63,14 +62,13 @@ class GuzzleHttpClient implements HttpClientInterface
      * Create a HEAD request for the client
      *
      * @param string $uri     Resource URI
-     * @param array  $headers HTTP headers
      * @param array  $options Options to apply to the request
      *
      * @return HttpResponse
      */
-    public function head($uri = null, $headers = null, array $options = array())
+    public function head($uri = null, array $options = array())
     {
-        $guzzleRequestInterface = $this->getGuzzleClient()->head($uri, $headers, $options);
+        $guzzleRequestInterface = $this->getGuzzleClient()->head($uri, $options);
 
         return $this->createResponse($guzzleRequestInterface);
     }
@@ -79,15 +77,13 @@ class GuzzleHttpClient implements HttpClientInterface
      * Create a DELETE request for the client
      *
      * @param string $uri     Resource URI
-     * @param array  $headers HTTP headers
-     * @param string $body    Body to send in the request
      * @param array  $options Options to apply to the request
      *
      * @return HttpResponse
      */
-    public function delete($uri = null, $headers = null, $body = null, array $options = array())
+    public function delete($uri = null, array $options = array())
     {
-        $guzzleRequestInterface = $this->getGuzzleClient()->delete($uri, $headers, $body, $options);
+        $guzzleRequestInterface = $this->getGuzzleClient()->delete($uri, $options);
 
         return $this->createResponse($guzzleRequestInterface);
     }
@@ -96,15 +92,13 @@ class GuzzleHttpClient implements HttpClientInterface
      * Create a PUT request for the client
      *
      * @param string $uri     Resource URI
-     * @param array  $headers HTTP headers
-     * @param string $body    Body to send in the request
      * @param array  $options Options to apply to the request
      *
      * @return HttpResponse
      */
-    public function put($uri = null, $headers = null, $body = null, array $options = array())
+    public function put($uri = null, array $options = array())
     {
-        $guzzleRequestInterface = $this->getGuzzleClient()->put($uri, $headers, $body, $options);
+        $guzzleRequestInterface = $this->getGuzzleClient()->put($uri, $options);
 
         return $this->createResponse($guzzleRequestInterface);
     }
@@ -113,15 +107,13 @@ class GuzzleHttpClient implements HttpClientInterface
      * Create a PATCH request for the client
      *
      * @param string $uri     Resource URI
-     * @param array  $headers HTTP headers
-     * @param string $body    Body to send in the request
      * @param array  $options Options to apply to the request
      *
      * @return HttpResponse
      */
-    public function patch($uri = null, $headers = null, $body = null, array $options = array())
+    public function patch($uri = null, array $options = array())
     {
-        $guzzleRequestInterface = $this->getGuzzleClient()->patch($uri, $headers, $body, $options);
+        $guzzleRequestInterface = $this->getGuzzleClient()->patch($uri, $options);
 
         return $this->createResponse($guzzleRequestInterface);
     }
@@ -130,42 +122,25 @@ class GuzzleHttpClient implements HttpClientInterface
      * Create a POST request for the client
      *
      * @param string $uri     Resource URI
-     * @param array  $headers HTTP headers
-     * @param string $body    Body to send in the request
      * @param array  $options Options to apply to the request
      *
      * @return HttpResponse
      */
-    public function post($uri = null, $headers = null, $body = null, array $options = array())
+    public function post($uri = null, array $options = array())
     {
-        $guzzleRequestInterface = $this->getGuzzleClient()->post($uri, $headers, $body, $options);
+        $guzzleRequestInterface = $this->getGuzzleClient()->post($uri, $options);
 
         return $this->createResponse($guzzleRequestInterface);
     }
 
     /**
-     * Create an OPTIONS request for the client
-     *
-     * @param string $uri     Resource URI
-     * @param array  $options Options to apply to the request
-     *
+     * @param ResponseInterface $responseInterface
      * @return HttpResponse
      */
-    public function options($uri = null, array $options = array())
+    private function createResponse($responseInterface)
     {
-        $guzzleRequestInterface = $this->getGuzzleClient()->options($uri, $options);
-
-        return $this->createResponse($guzzleRequestInterface);
-    }
-
-    /**
-     * @param RequestInterface $guzzleRequestInterface
-     * @return HttpResponse
-     */
-    private function createResponse($guzzleRequestInterface)
-    {
-        $statusCode = $guzzleRequestInterface->getResponse()->getStatusCode();
-        $body = $guzzleRequestInterface->getResponse()->getBody();
+        $statusCode = $responseInterface->getStatusCode();
+        $body = $responseInterface->getBody();
         $response = new HttpResponse($statusCode, $body);
 
         return $response;

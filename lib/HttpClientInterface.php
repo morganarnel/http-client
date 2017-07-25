@@ -34,78 +34,58 @@ interface HttpClientInterface
      * Create a GET request for the client
      *
      * @param string    $uri     Resource URI
-     * @param array     $headers HTTP headers
      * @param array     $options Options to apply to the request.
      * @return HttpResponse
      */
-    public function get($uri = null, $headers = null, $options = array());
+    public function get($uri = null, $options = array());
 
     /**
      * Create a HEAD request for the client
      *
      * @param string    $uri     Resource URI
-     * @param array     $headers HTTP headers
      * @param array     $options Options to apply to the request
      *
      * @return HttpResponse
      */
-    public function head($uri = null, $headers = null, array $options = array());
+    public function head($uri = null, array $options = array());
 
     /**
      * Create a DELETE request for the client
      *
      * @param string    $uri     Resource URI
-     * @param array     $headers HTTP headers
-     * @param string    $body    Body to send in the request
      * @param array     $options Options to apply to the request
      *
      * @return HttpResponse
      */
-    public function delete($uri = null, $headers = null, $body = null, array $options = array());
+    public function delete($uri = null, array $options = array());
 
     /**
      * Create a PUT request for the client
      *
      * @param string    $uri     Resource URI
-     * @param array     $headers HTTP headers
-     * @param string    $body    Body to send in the request
      * @param array     $options Options to apply to the request
      *
      * @return HttpResponse
      */
-    public function put($uri = null, $headers = null, $body = null, array $options = array());
+    public function put($uri = null, array $options = array());
 
     /**
      * Create a PATCH request for the client
      *
      * @param string    $uri     Resource URI
-     * @param array     $headers HTTP headers
-     * @param string    $body    Body to send in the request
      * @param array     $options Options to apply to the request
      *
      * @return HttpResponse
      */
-    public function patch($uri = null, $headers = null, $body = null, array $options = array());
+    public function patch($uri = null, array $options = array());
 
     /**
      * Create a POST request for the client
      *
      * @param string    $uri     Resource URI
-     * @param array     $headers HTTP headers
-     * @param string    $body    Body to send in the request
      * @param array     $options Options to apply to the request
      *
      * @return HttpResponse
      */
-    public function post($uri = null, $headers = null, $body = null, array $options = array());
-
-    /**
-     * Create an OPTIONS request for the client
-     *
-     * @param string    $uri     Resource URI
-     * @param array     $options Options to apply to the request
-     *
-     * @return \HttpResponse
-     */
-    public function options($uri = null, array $options = array());
+    public function post($uri = null, array $options = array());
 }
