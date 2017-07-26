@@ -141,6 +141,22 @@ class HttpResponse
     }
 
     /**
+     * @return array
+     */
+    public function getBodyJsonAsArray()
+    {
+        return json_decode($this->getBody(), true);
+    }
+
+    /**
+     * @return \stdClass
+     */
+    public function getBodyJsonAsObject()
+    {
+        return json_decode($this->getBody());
+    }
+
+    /**
      * @param string $body
      */
     public function setBody($body)
