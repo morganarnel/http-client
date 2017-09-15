@@ -115,7 +115,7 @@ class HttpResponse
     public function getReasonPhrase($statusCode = null)
     {
         $reasonPhrase = '';
-        $statusCode = is_null($statusCode) ? $this->getStatusCode() : (int) $statusCode;
+        $statusCode = is_null($statusCode) ? $this->getStatusCode() : (int)$statusCode;
         if ($this->isValidStatusCode($statusCode)) {
             $reasonPhrase = self::$statusTexts[$this->getStatusCode()];
         }
@@ -161,7 +161,7 @@ class HttpResponse
      */
     public function setBody($body)
     {
-        $this->body = (string) $body;
+        $this->body = (string)$body;
     }
 
     /**
@@ -177,6 +177,46 @@ class HttpResponse
      */
     public function setStatusCode($statusCode)
     {
-        $this->statusCode = (int) $statusCode;
+        $this->statusCode = (int)$statusCode;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSuccess()
+    {
+        return ($this->getStatusCode() >= 200) && ($this->getStatusCode() < 300);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isRedirection()
+    {
+        return ($this->getStatusCode() >= 300) && ($this->getStatusCode() < 400);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isClientError()
+    {
+        return ($this->getStatusCode() >= 300) && ($this->getStatusCode() < 400);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isServerError()
+    {
+        return ($this->getStatusCode() >= 400) && ($this->getStatusCode() < 500);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isError()
+    {
+        return ($this->isClientError() || $this->isServerError());
     }
 }
